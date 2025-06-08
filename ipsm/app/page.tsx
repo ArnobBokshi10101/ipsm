@@ -78,7 +78,7 @@ export default function Home() {
             </Link>
             <Link href={"/auth/signin"}>
               <button className="flex h-12 items-center justify-center gap-2 rounded-xl border border-[#07D348]/30 bg-white/5 px-8 text-sm font-medium text-white backdrop-blur-sm transition-all hover:border-[#24fe41]/50 hover:bg-[#07D348]/10 hover:shadow-[0_0_20px_-5px_#07D348] group">
-                <span>Login to Dashboard</span>
+                <span>Access Dashboard</span>
                 <div className="w-0 h-[2px] bg-[#07D348] transition-all group-hover:w-4"></div>
               </button>
             </Link>

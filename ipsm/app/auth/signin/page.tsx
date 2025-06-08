@@ -26,15 +26,23 @@ export default function SignIn() {
       if (result?.error) {
         setError("Invalid credentials");
       } else {
-        router.push("/dashboard");
+        // Get user session to check role
+        const response = await fetch('/api/auth/session');
+        const session = await response.json();
+        
+        // Redirect based on user role
+        if (session?.user?.role === "ADMIN" || session?.user?.role === "MODERATOR") {
+          router.push("/dashboard");
+        } else {
+          router.push("/user-dashboard");
+        }
       }
-    } catch (_error) {  // Fixed unused variable warning
+    } catch (_error) {
       setError("An error occurred during sign in");
     } finally {
       setIsLoading(false);
     }
   };
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-neutral-900 to-neutral-900 flex flex-col justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden">

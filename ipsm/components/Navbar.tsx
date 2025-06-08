@@ -1,9 +1,12 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import MobileMenu from "./MobileMenu";
+
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <>
@@ -65,6 +68,17 @@ export default function Navbar() {
                 Contact
                 <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#07D348] transition-all group-hover:w-full"></span>
               </Link>
+
+              {/* Dashboard Link - Show based on user role */}
+              {session && (
+                <Link
+                  href={session.user.role === "ADMIN" || session.user.role === "MODERATOR" ? "/dashboard" : "/user-dashboard"}
+                  className="hidden md:block text-sm text-zinc-300 hover:text-white transition-colors relative group"
+                >
+                  Dashboard
+                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#07D348] transition-all group-hover:w-full"></span>
+                </Link>
+              )}
 
               <button className="group relative flex items-center gap-2 rounded-full bg-gradient-to-br from-red-500 to-rose-600 pl-4 pr-5 py-2 text-sm font-medium text-white shadow-lg shadow-red-500/20 transition-all hover:shadow-red-500/30 hover:scale-[1.02]">
                 <span className="absolute inset-0 rounded-full bg-gradient-to-br opacity-0 transition-opacity group-hover:opacity-100 from-red-600 to-rose-700 -z-10" />
