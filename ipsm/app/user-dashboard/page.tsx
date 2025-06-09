@@ -70,10 +70,10 @@ export default function UserDashboard() {
 
   const getStatusColor = (status: ReportStatus) => {
     const colors = {
-      PENDING: "bg-amber-500/10 text-amber-500 border-amber-500/20",
-      IN_PROGRESS: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-      RESOLVED: "bg-green-500/10 text-green-500 border-green-500/20",
-      DISMISSED: "bg-red-500/10 text-red-500 border-red-500/20",
+      PENDING: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+      IN_PROGRESS: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+      RESOLVED: "bg-green-500/10 text-green-400 border-green-500/20",
+      DISMISSED: "bg-red-500/10 text-red-400 border-red-500/20",
     };
     return colors[status];
   };
@@ -82,8 +82,8 @@ export default function UserDashboard() {
     switch (status) {
       case "PENDING":
         return (
-          <svg className="w-4 h-4\" fill="none\" viewBox="0 0 24 24\" stroke="currentColor">
-            <path strokeLinecap="round\" strokeLinejoin="round\" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         );
       case "IN_PROGRESS":
@@ -109,7 +109,7 @@ export default function UserDashboard() {
 
   if (status === "loading" || isLoading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#07D348]"></div>
       </div>
     );
@@ -124,9 +124,12 @@ export default function UserDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
+      {/* Background pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.02)_1px,transparent_0)] [background-size:50px_50px]" />
+      
       {/* Navigation */}
-      <nav className="border-b border-neutral-800 bg-black/50 backdrop-blur-xl sticky top-0 z-50">
+      <nav className="border-b border-white/10 bg-[#0a0a0a]/80 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
@@ -136,18 +139,18 @@ export default function UserDashboard() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 15V17M6 21H18C19.1046 21 20 20.1046 20 19V13C20 11.8954 19.1046 11 18 11H6C4.89543 11 4 11.8954 4 13V19C4 20.1046 4.89543 21 6 21ZM16 11V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V11H16Z" />
                   </svg>
                 </div>
-                <span className="text-xl font-bold bg-white bg-clip-text text-transparent">CivicSafe</span>
+                <span className="text-xl font-bold text-white">CivicSafe</span>
               </Link>
-              <span className="text-neutral-400">|</span>
-              <h1 className="text-lg font-semibold text-neutral-200">My Dashboard</h1>
+              <span className="text-white/40">|</span>
+              <h1 className="text-lg font-semibold text-white">My Dashboard</h1>
             </div>
             <div className="flex items-center gap-6">
-              <span className="text-sm text-neutral-400">
+              <span className="text-sm text-white/60">
                 Welcome, {session?.user?.name || session?.user?.email}
               </span>
               <button
                 onClick={() => signOut()}
-                className="px-4 py-2 text-sm font-medium text-neutral-300 bg-neutral-900 rounded-lg hover:bg-neutral-800 border border-neutral-800 transition-all hover:border-neutral-700"
+                className="px-4 py-2 text-sm font-medium text-white/70 bg-white/5 rounded-lg hover:bg-white/10 border border-white/10 transition-all hover:border-white/20"
               >
                 Sign out
               </button>
@@ -156,11 +159,11 @@ export default function UserDashboard() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Quick Actions */}
         <div className="mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link href="/submit-report">
-            <div className="group relative overflow-hidden rounded-xl border border-[#07D348]/20 bg-gradient-to-br from-[#07D348]/10 to-transparent p-6 transition-all hover:border-[#07D348]/40 hover:bg-[#07D348]/20 cursor-pointer">
+            <div className="group relative overflow-hidden rounded-xl border border-[#07D348]/20 bg-gradient-to-br from-[#07D348]/10 to-transparent p-6 transition-all hover:border-[#07D348]/40 hover:bg-[#07D348]/20 cursor-pointer backdrop-blur-sm">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#07D348]/20">
                   <svg className="h-6 w-6 text-[#07D348]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -169,14 +172,14 @@ export default function UserDashboard() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-white">Submit New Report</h3>
-                  <p className="text-sm text-neutral-400">Report a new incident</p>
+                  <p className="text-sm text-white/60">Report a new incident</p>
                 </div>
               </div>
             </div>
           </Link>
 
           <Link href="/track-report">
-            <div className="group relative overflow-hidden rounded-xl border border-blue-500/20 bg-gradient-to-br from-blue-500/10 to-transparent p-6 transition-all hover:border-blue-500/40 hover:bg-blue-500/20 cursor-pointer">
+            <div className="group relative overflow-hidden rounded-xl border border-blue-500/20 bg-gradient-to-br from-blue-500/10 to-transparent p-6 transition-all hover:border-blue-500/40 hover:bg-blue-500/20 cursor-pointer backdrop-blur-sm">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20">
                   <svg className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -185,14 +188,14 @@ export default function UserDashboard() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-white">Track Report</h3>
-                  <p className="text-sm text-neutral-400">Check report status</p>
+                  <p className="text-sm text-white/60">Check report status</p>
                 </div>
               </div>
             </div>
           </Link>
 
           <Link href="/community">
-            <div className="group relative overflow-hidden rounded-xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-transparent p-6 transition-all hover:border-purple-500/40 hover:bg-purple-500/20 cursor-pointer">
+            <div className="group relative overflow-hidden rounded-xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-transparent p-6 transition-all hover:border-purple-500/40 hover:bg-purple-500/20 cursor-pointer backdrop-blur-sm">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20">
                   <svg className="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -201,7 +204,7 @@ export default function UserDashboard() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-white">Community</h3>
-                  <p className="text-sm text-neutral-400">Join discussions</p>
+                  <p className="text-sm text-white/60">Join discussions</p>
                 </div>
               </div>
             </div>
@@ -210,14 +213,14 @@ export default function UserDashboard() {
 
         {/* Statistics Cards */}
         <div className="mb-8 grid grid-cols-2 md:grid-cols-5 gap-4">
-          <div className="bg-neutral-900/50 backdrop-blur-sm rounded-xl p-6 border border-neutral-800">
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-neutral-400">Total Reports</p>
+                <p className="text-sm text-white/60">Total Reports</p>
                 <p className="text-2xl font-bold text-white">{stats.total}</p>
               </div>
-              <div className="p-3 bg-neutral-800 rounded-lg">
-                <svg className="w-6 h-6 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="p-3 bg-white/10 rounded-lg">
+                <svg className="w-6 h-6 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
@@ -228,10 +231,10 @@ export default function UserDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-amber-400">Pending</p>
-                <p className="text-2xl font-bold text-amber-500">{stats.pending}</p>
+                <p className="text-2xl font-bold text-amber-400">{stats.pending}</p>
               </div>
               <div className="p-3 bg-amber-500/20 rounded-lg">
-                <svg className="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
@@ -242,10 +245,10 @@ export default function UserDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-blue-400">In Progress</p>
-                <p className="text-2xl font-bold text-blue-500">{stats.inProgress}</p>
+                <p className="text-2xl font-bold text-blue-400">{stats.inProgress}</p>
               </div>
               <div className="p-3 bg-blue-500/20 rounded-lg">
-                <svg className="w-6 h-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
@@ -256,10 +259,10 @@ export default function UserDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-green-400">Resolved</p>
-                <p className="text-2xl font-bold text-green-500">{stats.resolved}</p>
+                <p className="text-2xl font-bold text-green-400">{stats.resolved}</p>
               </div>
               <div className="p-3 bg-green-500/20 rounded-lg">
-                <svg className="w-6 h-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
@@ -270,10 +273,10 @@ export default function UserDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-red-400">Dismissed</p>
-                <p className="text-2xl font-bold text-red-500">{stats.dismissed}</p>
+                <p className="text-2xl font-bold text-red-400">{stats.dismissed}</p>
               </div>
               <div className="p-3 bg-red-500/20 rounded-lg">
-                <svg className="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </div>
@@ -287,7 +290,7 @@ export default function UserDashboard() {
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value as ReportStatus | "ALL")}
-              className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#07D348]/20 focus:border-[#07D348]/30 transition-all"
+              className="bg-white/5 border border-white/10 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#07D348]/20 focus:border-[#07D348]/30 transition-all backdrop-blur-sm"
             >
               <option value="ALL">All Statuses</option>
               {Object.values(ReportStatus).map((status) => (
@@ -304,10 +307,10 @@ export default function UserDashboard() {
               placeholder="Search reports..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full sm:w-64 bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-[#07D348]/20 focus:border-[#07D348]/30 transition-all"
+              className="w-full sm:w-64 bg-white/5 border border-white/10 text-white rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-[#07D348]/20 focus:border-[#07D348]/30 transition-all backdrop-blur-sm placeholder-white/40"
             />
             <svg
-              className="absolute left-3 top-2.5 h-5 w-5 text-neutral-500"
+              className="absolute left-3 top-2.5 h-5 w-5 text-white/40"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -320,12 +323,12 @@ export default function UserDashboard() {
         {/* Reports List */}
         <div className="space-y-4">
           {filteredReports.length === 0 ? (
-            <div className="text-center py-12 bg-neutral-900/50 rounded-xl border border-neutral-800">
-              <svg className="mx-auto h-12 w-12 text-neutral-500 mb-4\" fill="none\" viewBox="0 0 24 24\" stroke="currentColor">
-                <path strokeLinecap="round\" strokeLinejoin="round\" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            <div className="text-center py-12 bg-white/5 rounded-xl border border-white/10 backdrop-blur-sm">
+              <svg className="mx-auto h-12 w-12 text-white/40 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              <h3 className="text-lg font-medium text-neutral-300 mb-2">No reports found</h3>
-              <p className="text-neutral-500 mb-4">
+              <h3 className="text-lg font-medium text-white mb-2">No reports found</h3>
+              <p className="text-white/50 mb-4">
                 {searchTerm || filter !== "ALL" 
                   ? "Try adjusting your search or filter criteria" 
                   : "You haven't submitted any reports yet"}
@@ -342,12 +345,12 @@ export default function UserDashboard() {
             filteredReports.map((report) => (
               <div
                 key={report.id}
-                className="bg-neutral-900/50 backdrop-blur-sm rounded-xl p-6 border border-neutral-800 hover:border-neutral-700 transition-all group"
+                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all group"
               >
                 <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                   <div className="flex-1 space-y-4">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                      <h3 className="text-lg font-medium text-neutral-200 group-hover:text-white transition-colors">
+                      <h3 className="text-lg font-medium text-white group-hover:text-white transition-colors">
                         {report.title}
                       </h3>
                       <div className="flex items-center gap-2">
@@ -355,31 +358,31 @@ export default function UserDashboard() {
                           {getStatusIcon(report.status)}
                           {report.status.replace('_', ' ')}
                         </span>
-                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-neutral-800 text-neutral-400 border border-neutral-700">
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/10 text-white/60 border border-white/20">
                           {report.type.replace('_', ' ')}
                         </span>
                       </div>
                     </div>
 
-                    <p className="text-neutral-400 text-sm leading-relaxed">
+                    <p className="text-white/60 text-sm leading-relaxed">
                       {report.description}
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-                      <div className="flex items-center gap-2 text-neutral-500">
+                      <div className="flex items-center gap-2 text-white/50">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                         <span>{report.location || "Location not specified"}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-neutral-500">
+                      <div className="flex items-center gap-2 text-white/50">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a4 4 0 118 0v4M8 7h8M8 7H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-2" />
                         </svg>
                         <span>ID: {report.reportId}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-neutral-500">
+                      <div className="flex items-center gap-2 text-white/50">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -389,7 +392,7 @@ export default function UserDashboard() {
 
                     {report.image && (
                       <div className="mt-4">
-                        <div className="relative w-full h-48 rounded-lg border border-neutral-800 overflow-hidden">
+                        <div className="relative w-full h-48 rounded-lg border border-white/10 overflow-hidden">
                           <Image
                             src={report.image}
                             alt="Report evidence"
@@ -404,7 +407,7 @@ export default function UserDashboard() {
 
                   <div className="flex flex-row lg:flex-col gap-2">
                     <Link href={`/track-report?id=${report.reportId}`}>
-                      <button className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded-lg transition-colors text-sm">
+                      <button className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -421,7 +424,7 @@ export default function UserDashboard() {
 
         {/* Pagination could be added here if needed */}
         {filteredReports.length > 0 && (
-          <div className="mt-8 text-center text-sm text-neutral-500">
+          <div className="mt-8 text-center text-sm text-white/50">
             Showing {filteredReports.length} of {reports.length} reports
           </div>
         )}

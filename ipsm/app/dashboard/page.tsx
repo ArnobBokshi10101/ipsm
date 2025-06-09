@@ -89,10 +89,10 @@ export default function Dashboard() {
 
   const getStatusColor = (status: ReportStatus) => {
     const colors = {
-      PENDING: "bg-amber-500/10 text-amber-500 border-amber-500/20",
-      IN_PROGRESS: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-      RESOLVED: "bg-green-500/10 text-green-500 border-green-500/20",
-      DISMISSED: "bg-neutral-500/10 text-neutral-400 border-neutral-500/20",
+      PENDING: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+      IN_PROGRESS: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+      RESOLVED: "bg-green-500/10 text-green-400 border-green-500/20",
+      DISMISSED: "bg-red-500/10 text-red-400 border-red-500/20",
     };
     return colors[status];
   };
@@ -105,34 +105,37 @@ export default function Dashboard() {
       Traffic: "bg-purple-500/10 text-purple-400 border-purple-500/20",
       Crime: "bg-rose-500/10 text-rose-400 border-rose-500/20",
       Disaster: "bg-orange-500/10 text-orange-400 border-orange-500/20",
-      General: "bg-neutral-800/50 text-neutral-400 border-neutral-700/20",
+      General: "bg-white/5 text-white/60 border-white/10",
     };
-    return colors[department] || "bg-neutral-800/50 text-neutral-400 border-neutral-700/20";
+    return colors[department] || "bg-white/5 text-white/60 border-white/10";
   };
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-black">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500"></div>
+      <div className="flex items-center justify-center min-h-screen bg-[#0a0a0a]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#07D348]"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <nav className="border-b border-neutral-800 bg-black/50 backdrop-blur-xl sticky top-0 z-50">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
+      {/* Background pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.02)_1px,transparent_0)] [background-size:50px_50px]" />
+      
+      <nav className="border-b border-white/10 bg-[#0a0a0a]/80 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold bg-white bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold text-white">
               Admin Dashboard
             </h1>
             <div className="flex items-center gap-6">
-              <span className="text-neutral-400">
+              <span className="text-white/60">
                 {session?.user?.name || "Admin"}
               </span>
               <button
                 onClick={() => signOut()}
-                className="px-4 py-2 text-sm font-medium text-neutral-300 bg-neutral-900 rounded-lg hover:bg-neutral-800 border border-neutral-800 transition-all hover:border-neutral-700"
+                className="px-4 py-2 text-sm font-medium text-white/70 bg-white/5 rounded-lg hover:bg-white/10 border border-white/10 transition-all hover:border-white/20"
               >
                 Sign out
               </button>
@@ -141,13 +144,13 @@ export default function Dashboard() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 flex flex-wrap gap-4 items-center justify-between">
           <div className="flex gap-4">
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value as ReportStatus | "ALL")}
-              className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500/20 focus:border-green-600/30 transition-all"
+              className="bg-white/5 border border-white/10 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#07D348]/20 focus:border-[#07D348]/30 transition-all backdrop-blur-sm"
             >
               <option value="ALL">All Statuses</option>
               {Object.values(ReportStatus).map((status) => (
@@ -160,7 +163,7 @@ export default function Dashboard() {
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value as ReportType | "ALL")}
-              className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500/20 focus:border-green-500/20 transition-all"
+              className="bg-white/5 border border-white/10 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#07D348]/20 focus:border-[#07D348]/20 transition-all backdrop-blur-sm"
             >
               <option value="ALL">All Types</option>
               {Object.values(ReportType).map((type) => (
@@ -171,7 +174,7 @@ export default function Dashboard() {
             </select>
           </div>
 
-          <div className="text-neutral-400">
+          <div className="text-white/60">
             {filteredReports.length} Reports
           </div>
         </div>
@@ -180,33 +183,33 @@ export default function Dashboard() {
           {filteredReports.map((report) => (
             <div
               key={report.id}
-              className="bg-neutral-900/50 backdrop-blur-sm rounded-xl p-6 border border-neutral-800 hover:border-neutral-700 transition-all group"
+              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all group"
             >
               <div className="flex justify-between items-start gap-6">
                 <div className="space-y-4 flex-1">
                   <div className="flex items-center gap-3">
-                    <h2 className="text-lg font-medium text-neutral-200">
+                    <h2 className="text-lg font-medium text-white">
                       {report.title}
                     </h2>
                     <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                      className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(
                         report.status
                       )}`}
                     >
                       {report.status}
                     </span>
                   </div>
-                  <p className="text-neutral-400 text-sm">
+                  <p className="text-white/60 text-sm">
                     {report.description}
                   </p>
                   
                   {!classifications[report.id] ? (
-                    <div className="mt-2 flex items-center gap-2 text-xs text-neutral-500">
+                    <div className="mt-2 flex items-center gap-2 text-xs text-white/40">
                       Analyzing report...
                     </div>
                   ) : (
                     <div className="mt-2 flex items-center gap-2">
-                      <span className="text-xs text-neutral-500">Assigned to:</span>
+                      <span className="text-xs text-white/40">Assigned to:</span>
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-medium border ${getDepartmentColor(
                           classifications[report.id]
@@ -217,29 +220,29 @@ export default function Dashboard() {
                     </div>
                   )}
 
-                  <div className="flex flex-wrap gap-6 text-sm text-neutral-500">
+                  <div className="flex flex-wrap gap-6 text-sm text-white/50">
                     <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-neutral-800 flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-neutral-600"></div>
+                      <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center">
+                        <div className="w-2 h-2 rounded-full bg-white/40"></div>
                       </div>
                       {report.type}
                     </span>
                     <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-neutral-800 flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-neutral-600"></div>
+                      <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center">
+                        <div className="w-2 h-2 rounded-full bg-white/40"></div>
                       </div>
                       {report.location || "N/A"}
                     </span>
                     <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-neutral-800 flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-neutral-600"></div>
+                      <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center">
+                        <div className="w-2 h-2 rounded-full bg-white/40"></div>
                       </div>
                       {new Date(report.createdAt).toLocaleDateString()}
                     </span>
                   </div>
 
                   {report.image && (
-                    <div className="mt-4 relative w-full h-48 rounded-lg border border-neutral-800 overflow-hidden">
+                    <div className="mt-4 relative w-full h-48 rounded-lg border border-white/10 overflow-hidden">
                       <Image
                         src={report.image}
                         alt="Report evidence"
@@ -254,7 +257,7 @@ export default function Dashboard() {
                 <select
                   value={report.status}
                   onChange={(e) => updateReportStatus(report.id, e.target.value as ReportStatus)}
-                  className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-600 focus:border-green-600 hover:border-neutral-700 transition-colors"
+                  className="bg-white/5 border border-white/10 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#07D348] focus:border-[#07D348] hover:border-white/20 transition-colors backdrop-blur-sm"
                 >
                   {Object.values(ReportStatus).map((status) => (
                     <option key={status} value={status}>
@@ -267,7 +270,7 @@ export default function Dashboard() {
           ))}
 
           {filteredReports.length === 0 && (
-            <div className="text-center py-12 text-neutral-500 bg-neutral-900/50 rounded-xl border border-neutral-800">
+            <div className="text-center py-12 text-white/50 bg-white/5 rounded-xl border border-white/10 backdrop-blur-sm">
               No reports found matching the selected filters.
             </div>
           )}
