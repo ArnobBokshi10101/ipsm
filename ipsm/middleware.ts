@@ -27,6 +27,8 @@ export default withAuth(
     if (req.nextUrl.pathname.startsWith("/dashboard") && isUser) {
       return NextResponse.redirect(new URL("/user-dashboard", req.url));
     }
+
+    return NextResponse.next();
   },
   {
     callbacks: {
