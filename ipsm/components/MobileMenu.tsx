@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -12,17 +13,18 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     <div className="fixed inset-0 z-50 md:hidden">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 bg-background/60 backdrop-blur-sm"
         onClick={onClose}
       />
 
       {/* Menu content */}
-      <div className="fixed right-0 top-0 h-full w-64 bg-zinc-900 p-6 shadow-xl">
+      <div className="fixed right-0 top-0 h-full w-64 bg-card border-l border-border p-6 shadow-xl">
         <div className="flex flex-col space-y-6">
-          <div className="flex justify-end">
+          <div className="flex justify-between items-center">
+            <ThemeToggle />
             <button
               onClick={onClose}
-              className="p-2 text-zinc-400 hover:text-white"
+              className="p-2 text-muted-foreground hover:text-foreground"
             >
               <svg
                 className="h-6 w-6"
@@ -43,35 +45,35 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <nav className="flex flex-col space-y-4">
             <Link
               href="/submit-report"
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               onClick={onClose}
             >
               Submit Report
             </Link>
             <Link
               href="/track-report"
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               onClick={onClose}
             >
               Track Report
             </Link>
             <Link
               href="/how-it-works"
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               onClick={onClose}
             >
               User guide
             </Link>
             <Link
-              href="/resources"
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
+              href="/community"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               onClick={onClose}
             >
-              Resources
+              Join the Community
             </Link>
             <Link
               href="/contact"
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               onClick={onClose}
             >
               Contact
