@@ -61,8 +61,8 @@ export default function Home() {
                 title: "Anonymous & Verified Reporting",
                 description: "Submit reports anonymously or choose to verify for follow-ups — your identity, your control.",
                 icon: (
-                  <svg className="h-6 w-6 text-[hsl(var(--civic-primary))]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.656 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <svg className="h-6 w-6 text-[hsl(var(--civic-primary))]\" fill="none\" viewBox="0 0 24 24\" stroke="currentColor\" strokeWidth="2">
+                    <path strokeLinecap="round\" strokeLinejoin="round\" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.656 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 ),
               },
